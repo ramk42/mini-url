@@ -1,3 +1,4 @@
+// Package env provides functions to get environment variables as different types.
 package env
 
 import (

@@ -1,3 +1,4 @@
+// Package model contains the URL model
 package model
 
 import (

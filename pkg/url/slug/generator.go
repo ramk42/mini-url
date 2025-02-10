@@ -1,3 +1,4 @@
+// Package slug provides functions to generate, clean and validate slugs.
 package slug
 
 import (
@@ -20,10 +21,6 @@ func Generate(length int) string {
 	}
 	return string(b)
 }
-
-var (
-	validSlug = regexp.MustCompile(fmt.Sprintf("^[%s]{%d}$", regexp.QuoteMeta(charset), model.Sluglength))
-)
 
 func Clean(slug string) string {
 	cleanedSlug := strings.TrimSpace(slug)

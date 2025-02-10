@@ -1,3 +1,4 @@
+// Package repository provides the database operations for the URL shortener service.
 package repository
 
 import (

@@ -53,7 +53,7 @@ func (u *URL) Resolve(w http.ResponseWriter, r *http.Request) {
 	}
 	resolvedURL, err := u.shortenerUsecase.Resolve(r.Context(), cleanedSlug)
 	if err != nil {
-		if errors.Is(apperr.ErrURLNotFound, err) {
+		if errors.Is(err, apperr.ErrURLNotFound) {
 			render.Render(w, r, httprenderer.ErrNotFoundRequest(err))
 			return
 		}

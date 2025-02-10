@@ -1,3 +1,4 @@
+// Package application provides the entry point to the application.
 package application
 
 import (

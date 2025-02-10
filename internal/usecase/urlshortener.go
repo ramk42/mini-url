@@ -1,3 +1,4 @@
+// Package usecase contains the business logic for the URLShortener
 package usecase
 
 import (
@@ -18,8 +19,8 @@ type URLShortener struct {
 	baseURL string
 }
 
-func NewURLShortener(urlRepo port.URLRepository, baseUrl string) *URLShortener {
-	return &URLShortener{urlRepo: urlRepo, baseURL: baseUrl}
+func NewURLShortener(urlRepo port.URLRepository, baseURL string) *URLShortener {
+	return &URLShortener{urlRepo: urlRepo, baseURL: baseURL}
 }
 
 func (u *URLShortener) ShortenURL(ctx context.Context, url model.URL, expirationDays int) (string, error) {
@@ -33,11 +34,11 @@ func (u *URLShortener) ShortenURL(ctx context.Context, url model.URL, expiration
 		t := time.Now().AddDate(0, 0, expirationDays)
 		url.ExpiresAt = &t
 	}
-	var persistedUrl model.URL
+	var persistedURL model.URL
 	err = retry.Do(
 		func() error {
 			url.Slug = slug.Generate(model.Sluglength)
-			persistedUrl, err = u.urlRepo.Save(ctx, url)
+			persistedURL, err = u.urlRepo.Save(ctx, url)
 			if err != nil {
 				if errors.Is(err, apperr.ErrURLConflict) {
 					log.Warn().Msg("slug collision detected! retrying...")
@@ -54,7 +55,7 @@ func (u *URLShortener) ShortenURL(ctx context.Context, url model.URL, expiration
 		return "", err
 	}
 
-	return u.baseURL + "/" + persistedUrl.Slug, nil
+	return u.baseURL + "/" + persistedURL.Slug, nil
 }
 
 func (u *URLShortener) Resolve(ctx context.Context, slug string) (string, error) {

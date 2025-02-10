@@ -1,3 +1,4 @@
+// Package request bind request and validate the URLShorten struct
 package request
 
 import (

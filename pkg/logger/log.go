@@ -1,3 +1,4 @@
+// Package logger provides a global logger instance that can be used throughout the application.
 package logger
 
 import (

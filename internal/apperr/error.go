@@ -1,3 +1,4 @@
+// Package apperr provides application errors.
 package apperr
 
 import "errors"

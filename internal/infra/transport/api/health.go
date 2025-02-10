@@ -1,3 +1,4 @@
+// Package api provides the http handlers for the URL shortener service.
 package api
 
 import "net/http"

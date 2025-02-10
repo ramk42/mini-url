@@ -28,8 +28,8 @@ func createRouter() *chi.Mux {
 
 	urlRepository := repository.NewURL(database.GetInstance())
 
-	baseUrl := env.GetEnvAsString("BASE-URL", "http://localhost:8080")
-	shortenerUsecase := usecase.NewURLShortener(urlRepository, baseUrl)
+	baseURL := env.GetEnvAsString("BASE-URL", "http://localhost:8080")
+	shortenerUsecase := usecase.NewURLShortener(urlRepository, baseURL)
 	urlHandler := handler.NewURL(shortenerUsecase)
 
 	r.Post("/shorten", urlHandler.Shorten)

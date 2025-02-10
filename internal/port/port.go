@@ -1,3 +1,4 @@
+// Package port contains the interfaces for the URLShortener and URLRepository
 package port
 
 import (

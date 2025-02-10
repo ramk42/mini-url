@@ -1,3 +1,4 @@
+// Package normalizer provides a function to normalize a URL.
 package normalizer
 
 import (
