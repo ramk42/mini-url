@@ -73,7 +73,6 @@ go-static-checks: # Using static analysis, it finds bugs and performance issues,
 go-test:
 	@echo "  >  Run tests..."
 	@GOBIN=$(GOBIN) go install github.com/onsi/ginkgo/v2/ginkgo
-	@mkdir -p cover
 	@GOCOVERDIR=cover $(GOBIN)/ginkgo -r -race -cover --randomize-all --randomize-suites --trace --v ./
 
 go-test-cov:

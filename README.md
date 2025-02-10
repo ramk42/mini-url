@@ -83,7 +83,7 @@ To setup the project for the first time, use the following command:
 You have to create a `.env` file in the root directory of the project with the following content:
 
 ```sh
-eco .env.example > .env
+echo .env.example > .env
 ```
 
 Run the postgres database using the following command:
@@ -118,6 +118,7 @@ make go-test
 You can test the two api endpoints using the following scripts:
 
 ```sh
+godotenv -f .env make go-run
 ./test-scripts/shorten.sh
 ./test-scripts/resolve.sh
 ./test-scripts/vegeta-test.sh # for performance testing
@@ -151,8 +152,6 @@ make code-quality
 - [Docker](https://www.docker.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Pgconn](github.com/jackc/pgx/v5/pgconn)
-
-
 
 
 Good reading! 😇
