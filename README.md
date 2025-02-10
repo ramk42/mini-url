@@ -40,6 +40,7 @@ Only for development environment, you can use the following command to run the a
 - `DB_NAME`: Database name (default: `mini_url`)
 - `DB_SSLMODE`: Database SSL mode (default: `disable`) 
 - `BASE_URL`: Base URL for the shortened URLs (default: `http://localhost:8080`)
+```
 
 ## API Endpoints
 
@@ -109,11 +110,18 @@ Note : The database will be created automatically when the application is run fo
 
 ### Running Tests
 
-To run the tests, use the following command:
+To run unit tests, use the following command:
 ```sh
 make go-test
 ```
+#### test scripts
+You can test the two api endpoints using the following scripts:
 
+```sh
+./test-scripts/shorten.sh
+./test-scripts/resolve.sh
+./test-scripts/vegeta-test.sh # for performance testing
+```
 ### running the application without Docker
 install the `godotenv` package using the following command:
 

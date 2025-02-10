@@ -1,6 +1,6 @@
 # test vegeta click increment
 # be careful with the rate and workers, it can crash the website redirected
-echo "GET http://localhost:8080/[REPLACE-YOUR-SLUG]" | vegeta attack \
+echo "GET http://localhost:8080/tIj4s1" | vegeta attack \
   -rate=100 \
   -workers=1000 \
   -duration=10s \
