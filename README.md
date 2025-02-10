@@ -51,7 +51,7 @@ Only for development environment, you can use the following command to run the a
 - **Request Body**:
     ```json
     {
-        "long_url": "https://example.com",
+        "long_url": "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
         "expiration_days": 30
     }
     ```
@@ -154,4 +154,4 @@ make code-quality
 - [Pgconn](github.com/jackc/pgx/v5/pgconn)
 
 
-Good reading! 😇
+Happy reading! 😇
