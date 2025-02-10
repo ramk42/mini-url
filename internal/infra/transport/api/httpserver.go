@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"errors"
+	"github.com/ramk42/mini-url/internal/infra/database"
 	"log"
 	"net/http"
 	"os"
@@ -46,5 +47,9 @@ func ListenAndServe() {
 		log.Printf("Graceful shutdown error: %v", err)
 	} else {
 		log.Println("Server shut down cleanly")
+	}
+	log.Println("Closing database connections...")
+	if err := database.Close(); err != nil {
+		log.Printf("Graceful shutdown error: %v", err)
 	}
 }

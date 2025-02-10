@@ -4,7 +4,12 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/render"
+	"github.com/ramk42/mini-url/internal/infra/database"
+	"github.com/ramk42/mini-url/internal/infra/env"
+	"github.com/ramk42/mini-url/internal/infra/repository"
+	"github.com/ramk42/mini-url/internal/infra/transport/api/handler"
 	apimiddleware "github.com/ramk42/mini-url/internal/infra/transport/api/middleware"
+	"github.com/ramk42/mini-url/internal/usecase"
 	"net/http"
 )
 
@@ -20,6 +25,16 @@ func createRouter() *chi.Mux {
 
 	// Routes
 	r.Get("/health", HealthProbe)
+
+	urlRepository := repository.NewURL(database.GetInstance())
+
+	baseUrl := env.GetEnvAsString("BASE-URL", "http://localhost:8080")
+	shortenerUsecase := usecase.NewURLShortener(urlRepository, baseUrl)
+	urlHandler := handler.NewURL(shortenerUsecase)
+
+	r.Post("/shorten", urlHandler.Shorten)
+	r.Get("/{shortCode}", urlHandler.Resolve)
+
 	return r
 }
 

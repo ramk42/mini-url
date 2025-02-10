@@ -1,8 +1,9 @@
+// Package middleware implements the request logger middleware for the API server.
 package middleware
 
 import (
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/ramk42/mini-url/internal/infra/logging"
+	"github.com/ramk42/mini-url/pkg/logger"
 	"github.com/rs/zerolog"
 	"net/http"
 	"time"
@@ -26,8 +27,8 @@ func RequestLogger(next http.Handler) http.Handler {
 		next.ServeHTTP(recorder, r)
 		requestID := middleware.GetReqID(r.Context())
 		duration := time.Since(start)
-
-		logEvent := logging.Logger.Info().
+		log := logger.Instance()
+		logEvent := log.Info().
 			Str("request_id", requestID).
 			Str("method", r.Method).
 			Str("path", r.URL.Path).
@@ -36,7 +37,7 @@ func RequestLogger(next http.Handler) http.Handler {
 			Str("ip", r.RemoteAddr).
 			Str("user_agent", r.UserAgent())
 
-		if logging.Logger.GetLevel() == zerolog.DebugLevel {
+		if log.GetLevel() == zerolog.DebugLevel {
 			logEvent = logEvent.
 				Interface("request_headers", r.Header).
 				Interface("response_headers", recorder.Header())

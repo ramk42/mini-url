@@ -1,12 +1,16 @@
 package model
 
-import "time"
+import (
+	"time"
+)
+
+const Sluglength = 6
 
 type URL struct {
 	ID        string
 	Original  string
-	Short     string
+	Slug      string
 	CreatedAt time.Time
 	ExpiresAt *time.Time
-	Clicks    int
+	Clicks    int64
 }

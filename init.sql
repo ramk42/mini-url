@@ -1,12 +1,12 @@
-CREATE DATABASE IF NOT EXISTS mini_url;
+CREATE DATABASE mini_url;
 
 CREATE TABLE IF NOT EXISTS urls (
     id SERIAL PRIMARY KEY,
-    original_url TEXT NOT NULL,
-    slug TEXT UNIQUE NOT NULL,
-    created_at TIMESTAMP DEFAULT NOW(),
+    original_url TEXT NOT NULL UNIQUE,
+    slug VARCHAR(10) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     expires_at TIMESTAMP,
-    clicks INT DEFAULT 0
+    clicks INT DEFAULT 0 CHECK(clicks >= 0)
 );
 
 CREATE INDEX IF NOT EXISTS idx_slug ON urls(slug);
